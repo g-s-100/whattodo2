@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1>Connected</h1>
+  <div id="home">
+    <button type="button" @click='disconection'>Disconection</button>
+  </div>
+  <div id='dialog' class='moto'>
+    <input type="text" v-model="talkingTo" @keyup.enter='openDialog'>
+    <conversation
+      v-for="line in dialog"
+      :sentence="line"
+      :key="line.id"
+    ></conversation>
+    <input v-model="message" type="text" @keyup.enter="sendMessage">
+    <button type="button" @click='sendMessage'>Send</button>
+  </div>
+  <div id="sync-wrapper"></div>
+  <script type="text/javascript" src='/dist/home-window.js'></script>
+</body>
+</html>

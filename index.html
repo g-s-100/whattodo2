@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>whattodo</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="/dist/build.js"></script>
-  </body>
+<html>
+<head>
+  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+</head>
+<body>
+  <!--Fix rendering problem !!!-->
+  <div id='new'>
+    <form v-if='conecting' v-show=true>
+      <p>Identifiant:</p>
+      <input v-model="userID" type="text">
+      <p>Mot de Passe:</p>
+      <input v-model="password" type="password" @keyup.enter='logIn'>
+      <button @click="logIn" type="button">Connection</button></br>
+      <button @click="changeConectionType" type="button">Créer nouvel utilisateur</button>
+    </form>
+    <form v-else>
+      <p>Prénom:</p>
+      <input v-model="firstName" type="text">
+      <p>Nom de Famille:</p>
+      <input v-model="lastName" type="text">
+      <p>Age:</p>
+      <input v-model="age" type="text">
+      <p>Identifiant:</p>
+      <input v-model="userID" type="text">
+      <p>Mot de Passe:</p>
+      <input v-model="password" type="password" @keyup.enter='addNewUser'>
+      <button v-on:click="addNewUser" type="button">Créer nouvel utilisateur</button><br>
+      <button @click="changeConectionType" type="button">Se connecter</button>
+    </form>
+  </div>
+
+  <div id="sync-wrapper"></div>
+
+  <script src="/dist/connection-window.js"></script>
+  </script>
+</body>
 </html>
