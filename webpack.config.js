@@ -3,8 +3,8 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    connection: './src/connection.js',
-    home: './src/home.js'
+    connection: './src/scripts/connection.js',
+    home: './src/scripts/home.js'
   },
   output: {
     path: path.resolve(__dirname, './dist'),

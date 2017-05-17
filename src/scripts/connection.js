@@ -1,6 +1,11 @@
 import Vue from 'vue'
-import {crypt} from './scripts/cryptage.js';
-import {user} from './scripts/users.js';
+import {crypt} from './cryptage.js';
+import {user} from './users.js';
+
+// Controls the css class of objects so they don't render before the pages loads.
+const showOrHide = function(){
+  //
+}
 
 const conection = new Vue({
   el: "#new",
@@ -12,10 +17,13 @@ const conection = new Vue({
     lastName: "",
     age: "",
     userID: "",
-    password: ""
+    password: "",
+    showClass: 'to-hide'
   },
   methods: {
+    // Creates a new user in the database.
     addNewUser: function() {
+      // Defines the user object. Changes can easilly be done here for futures user's.
       var newUser = {
         _id: crypt.keyCypher(this.userID),
         password: crypt.keyCypher(this.password),
@@ -25,16 +33,20 @@ const conection = new Vue({
           age: crypt.keyCypher(this.age)
         },
         postsID: [],
-        dialogID: []
+        dialogID: [],
+        friendsID: []
       };
+      // Adds user to db and send you back to connection window.
       user.createUser(newUser);
       this.changeConectionType();
     },
     logIn: function() {
+      // Checks the input data.
       var tryingToConnectAs = {
         id: crypt.keyCypher(this.userID),
         password: crypt.keyCypher(this.password)
       };
+      // The data must be crypted before checking, else it won't work.
       user.logInCheck(tryingToConnectAs);
     },
     addPost: function() {

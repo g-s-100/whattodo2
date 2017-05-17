@@ -1,11 +1,13 @@
 body{
   background-color: #333;
   color: #8888FF;
-  font-size: 20px
+  font-size: 20px;
+
 }
 .moto{
   border: 2px solid white;
   margin-bottom: 50px;
+
 }
 .ME {
   padding-left: 100px;
@@ -29,4 +31,10 @@ body{
 }
 textarea{
   font-size: 20px
+}
+.to-hide{
+  display: none;
+}
+.to-show{
+  border: 1px solid gray;
 }

@@ -5,12 +5,20 @@
   <meta charset="utf-8">
 </head>
 <body>
-  <h1>Connected</h1>
   <div id="home">
-    <button type="button" @click='disconection'>Disconection</button>
+    <h1>Connected as {{me}}</h1>
+    <button type="button" @click='disconection'>Disconection</button><br>
+    <input type="text" v-model='newFriend'><br>
+    <button type="button" @click='addFriend'>Add to friends list</button>
+    <h2>My friends</h2>
+    <friend-list
+      v-for='friend in myFriends'
+      :friend='friend'
+      :key='friend.id'
+    ></friend-list>
   </div>
   <div id='dialog' class='moto'>
-    <input type="text" v-model="talkingTo" @keyup.enter='openDialog'>
+    <input type="text" v-model="talkingTo" @keyup.enter='openDialog'><br>
     <conversation
       v-for="line in dialog"
       :sentence="line"
