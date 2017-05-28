@@ -2,9 +2,8 @@ import Vue from 'vue'
 import {crypt} from './cryptage.js';
 import {user} from './users.js';
 
-// Controls the css class of objects so they don't render before the pages loads.
 const showOrHide = function(){
-  //
+  document.getElementById('new').className = 'to-show';
 }
 
 const conection = new Vue({
@@ -18,7 +17,7 @@ const conection = new Vue({
     age: "",
     userID: "",
     password: "",
-    showClass: 'to-hide'
+    showClass: showOrHide()
   },
   methods: {
     // Creates a new user in the database.
@@ -81,12 +80,3 @@ for(let i = 0; i < cookieList.length; i++){
 if(user.conectedAs.length > 0){
   location.assign("home.html");
 }
-
-
-
-
-
-
-
-
-// Hold it down.

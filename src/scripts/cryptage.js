@@ -1,4 +1,4 @@
-const key = 's:tèe†oüƒ,DJY∫üs∆9K∂U47”≠èu…[%h¢>åèäDPøq)ƒu+i&»¿6NbèƒºktCVLs¬z;|MxMuj¶l8^bL”X°µx≥∑π≥¬Jø^ª≈èÇè0…@!zMB'
+const key = 's:tèe†oüƒ,DJY∫üs∆9K∂U47tpèu…[%h¢>åèäDPøq)ƒu+i&»¿6NbèƒºktCVLs¬z;|MxMuj¶l8^bL$X°µx≥∑π≥¬Jø^ª≈èÇè0…@!zMB'
 
 const stringToArray = (string) => {
   return string.split("");

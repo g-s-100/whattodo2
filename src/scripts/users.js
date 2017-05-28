@@ -33,6 +33,10 @@ const updateData = function(){
           }
         }
         dialogApp.dialog = dialogList;
+        setTimeout(function(){
+          var elem = document.getElementById('dialog-scrolled');
+          elem.scrollTop = elem.scrollHeight;
+        }, 100);
       } else {
         console.log(err);
       }
@@ -59,6 +63,43 @@ function syncError(){
   syncDom.setAttribute('data-sync-state', 'error');
 }
 
+// Sorts a given array. (Is made for the posts array.)
+const ordreListe = function(liste){
+	var copyListe = [];
+	var trie = false;
+	var c = 0;
+	while(!trie){
+		for(let i = 0 ; i < liste.length; i++){
+			if(i !== liste.length-1){
+				if(liste[i].date.replace( /^\D+/g, '') > liste[i + 1].date.replace( /^\D+/g, '')){
+          var copy = liste[i];
+					liste[i] = liste[i+1];
+					liste[i+1] = copy;
+					c++;
+				} else if (liste[i].date.replace( /^\D+/g, '') == liste[i + 1].date.replace( /^\D+/g, '')) {
+				  if(liste[i].time > liste[i + 1].time){
+            var copy = liste[i];
+  					liste[i] = liste[i+1];
+  					liste[i+1] = copy;
+  					c++;
+          }
+				}
+			}
+		}
+		if(c == 0){
+			trie = true;
+		}else{
+			c = 0;
+		}
+	}
+  for(let i = 0; i < liste.length; i++){
+    copyListe.push(liste[liste.length - 1 - i]);
+  }
+  liste = copyListe;
+	return liste;
+}
+
+
 // 'user' handles everything related to the data base and the user's data.
 // 'user' is exported and can be accessed from any js file.
 const user = {
@@ -67,6 +108,7 @@ const user = {
   dialog: [],
   friendList: [],
   isConected: false,
+  allPosts: [],
   createUser: function(newUser){
     db.put(newUser);
   },
@@ -74,7 +116,6 @@ const user = {
     const me = crypt.keyCypher(this.conectedAs);
     db.get(me, (err, doc) => {
       if(doc.friendsID.indexOf(crypt.keyCypher(friend)) < 0) {
-        // TO DO: Before pushing the data check if 'friend' exisist.
         var newFriend = crypt.keyCypher(friend);
         doc.friendsID.push(newFriend);
         db.put(doc);
@@ -96,9 +137,6 @@ const user = {
         user.friendList = doc.friendsID;
       }
     });
-    /*db.get(me).then(function(me){
-      user.friendList = doc.friendsID;
-    })*/
   },
   logInCheck: function(tryingToConnectAs){
     db.get(tryingToConnectAs.id,(err, doc) => {
@@ -113,13 +151,11 @@ const user = {
           location.assign("home.html");
         } else {
           // If the password don't match the user's, you won't be able to connect.
-          // TO DO: Insted of logging it, show it on the page.
           console.log("Wrong password");
           this.isConected = false;
         }
       } else {
         // If the user id isn't in the db, you won't be able to connect.
-        // TO DO: Insted of logging it, show it on the page.
         console.log("user not found");
         this.isConected = false;
       }
@@ -129,10 +165,52 @@ const user = {
     // It adds the post id to the user's 'postsID' list.
     db.get(user, (err, doc) => {
       if(!err){
-        doc.postsID.push(post);
+        doc.postsID.push(post._id);
         db.put(doc);
+        db.put(post);
       } else {
         console.log(err);
+      }
+    });
+  },
+  getAllPosts: function() {
+    var me = crypt.keyCypher(this.conectedAs);
+    db.get(me, (err, doc) => {
+      if(!err){
+        var list = doc.postsID
+        for(let i = 0; i < list.length; i++) {
+          db.get(list[list.length - i - 1], (err, doc) => {
+            var newDoc = {
+              text: crypt.keyCypherDecryption(doc.postText),
+              date: crypt.keyCypherDecryption(doc.date),
+              by: crypt.keyCypherDecryption(doc.by),
+              time: crypt.keyCypherDecryption(doc.time)
+            }
+            user.allPosts.push(newDoc);
+          });
+        }
+        var myFriends = doc.friendsID;
+        for(let k = 0; k < myFriends.length; k++) {
+          db.get(myFriends[k], (err, doc) => {
+            if(!err){
+              var list2 = doc.postsID
+              for(let j = 0; j < list2.length; j++) {
+                db.get(list2[list2.length - j - 1], (err, doc) => {
+                  var newDoc = {
+                    text: crypt.keyCypherDecryption(doc.postText),
+                    date: crypt.keyCypherDecryption(doc.date),
+                    by: crypt.keyCypherDecryption(doc.by),
+                    time: crypt.keyCypherDecryption(doc.time)
+                  }
+                  user.allPosts.push(newDoc);
+				          user.allPosts = ordreListe(user.allPosts);
+                });
+              };
+            } else {
+                console.log(err)
+            }
+          });
+        }
       }
     });
   },
@@ -160,7 +238,7 @@ const user = {
               user.isTalkingTo = doc._id;
               user.dialog = doc.dialog;
             } else {
-              console.log(err)
+              console.log(err);
             }
           });
         } else {

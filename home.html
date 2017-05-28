@@ -1,31 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
 </head>
 <body>
-  <div id="home">
-    <h1>Connected as {{me}}</h1>
-    <button type="button" @click='disconection'>Disconection</button><br>
-    <input type="text" v-model='newFriend'><br>
-    <button type="button" @click='addFriend'>Add to friends list</button>
-    <h2>My friends</h2>
-    <friend-list
-      v-for='friend in myFriends'
-      :friend='friend'
-      :key='friend.id'
-    ></friend-list>
+  <div id="home" class='to-hide'>
+    <div class="container">
+      <div class="pull-right">
+        <h4>Connecté comme {{me}}</h4>
+        <img src="src/assets/connectdeconnect.png" alt="conncectdeconnect" width="30" height="auto">
+        <button type="button" @click='disconection' class="btn btn-outline-primary">Déconnection</button><br>
+      </div>
+    </div>
+    <div class="jumbotron">
+      <div class="media pull-left">
+        <img src="src/assets/logo.png" alt="logoforus" width="150" height="150">
+      </div>
+      <h1>What-to-do</h1>
+      <p>Bienvenue à WHAT-TO-DO. Ceci est un site pour partager l'amour et l'unité de notre terre.</p>
+    </div>
+    <div class="to-the-left">
+      <div class="wrapper">
+        <div id='posts' class="to-hide">
+          <div class="posts-to-side">
+            <img src="src/assets/postimages.png" alt="postimage" width="150" height="auto" style="float:left;">
+            <h2 style="margin-bottom:120px;">Posts:</h2>
+            <textarea name="new-post" rows="5" cols="50" v-model='newPost'></textarea><br>
+            <button type="button" @click='post' class="btn btn-outline-primary">Add post</button>
+            <div class="scroll-posts" id='posts-scrolled'>
+              <post-list
+                id='post-list'
+                v-for='(item, index) in allPosts'
+                :post='item'
+                :key='index'
+              ></post-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id='friend-div' class="to-hide">
+      <div>
+        <h2>Mes amis</h2>
+        <input type="text" v-model='newFriend'><br>
+        <button type="button" @click='addFriend' class="btn btn-outline-primary">Ajouter à la liste d'amis</button>
+        <div class="scroll-dialog" id='friends-scrolled'>
+          <friend-list
+            v-for='friend in myFriends'
+            :friend='friend'
+            :key='friend.id'
+          ></friend-list>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id='dialog' class='moto'>
+  <div id='dialog' class='to-hide'>
     <input type="text" v-model="talkingTo" @keyup.enter='openDialog'><br>
-    <conversation
-      v-for="line in dialog"
-      :sentence="line"
-      :key="line.id"
-    ></conversation>
+    <div class="scroll-dialog" id='dialog-scrolled'>
+      <conversation
+        v-for="line in dialog"
+        :sentence="line"
+        :key="line.id"
+      ></conversation>
+    </div>
     <input v-model="message" type="text" @keyup.enter="sendMessage">
-    <button type="button" @click='sendMessage'>Send</button>
+    <button type="button" @click='sendMessage' class="btn btn-outline-primary">Envoyer</button>
   </div>
   <div id="sync-wrapper"></div>
   <script type="text/javascript" src='/dist/home-window.js'></script>

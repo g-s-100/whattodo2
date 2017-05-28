@@ -1,38 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-  <!--Fix rendering problem !!!-->
-  <div id='new'>
-    <form v-if='conecting' class='to-show'>
-      <p>Identifiant:</p>
-      <input v-model="userID" type="text">
-      <p>Mot de Passe:</p>
-      <input v-model="password" type="password" @keyup.enter='logIn'>
-      <button @click="logIn" type="button">Connection</button></br>
-      <button @click="changeConectionType" type="button">Créer nouvel utilisateur</button>
-    </form>
-    <form v-else>
-      <p>Prénom:</p>
-      <input v-model="firstName" type="text">
-      <p>Nom de Famille:</p>
-      <input v-model="lastName" type="text">
-      <p>Age:</p>
-      <input v-model="age" type="text">
-      <p>Identifiant:</p>
-      <input v-model="userID" type="text">
-      <p>Mot de Passe:</p>
-      <input v-model="password" type="password" @keyup.enter='addNewUser'>
-      <button v-on:click="addNewUser" type="button">Créer nouvel utilisateur</button><br>
-      <button @click="changeConectionType" type="button">Se connecter</button>
-    </form>
+  <div id='new' class='to-hide'>
+    <div class="container" v-if='conecting'>
+      <div class="row pull-right">
+        <form>
+          <div class="col-sm-4">
+            <div class='input-group'>
+              <span class="input-group-addon">Identifiant:</span>
+              <input v-model="userID" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon">Mot de Passe:</span>
+              <input v-model="password" class='form-control' type="password" @keyup.enter='logIn'>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <button @click="logIn" class="btn btn-default" type="button">Connection</button>
+            <button @click="changeConectionType" class="btn btn-default" type="button">Créer nouvel utilisateur</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container" v-else>
+      <form>
+        <div class="col-sm-4">
+          <div class='input-group'>
+            <span class="input-group-addon">Prénom:</span>
+            <input v-model="firstName" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class='input-group'>
+            <span class="input-group-addon">Nom de Famille:</span>
+            <input v-model="lastName" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class='input-group'>
+            <span class="input-group-addon">Age:</span>
+            <input v-model="age" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class='input-group'>
+            <span class="input-group-addon">Identifiant:</span>
+            <input v-model="userID" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class='input-group'>
+            <span class="input-group-addon">Mot de Passe:</span>
+            <input v-model="password" class="form-control" type="password" @keyup.enter='addNewUser'>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <button v-on:click="addNewUser" class="btn btn-default" type="button">Créer nouvel utilisateur</button><br>
+          <button @click="changeConectionType" class="btn btn-default" type="button">Se connecter</button>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="jumbotron">
+      <div class="media pull-left">
+        <img src="src/assets/logo.png" alt="logo" width='150' height="150">
+      </div>
+      <h1>What-to-do</h1>
+      <p>Bienvenue à WHAT-TO-DO. Connectez-vous pour partager l'amour et l'unité de notre terre.</p>
+    </div>
+
+    <div class="text-center">
+      <img src="src/assets/whattodo.png" alt="indexphoto" width="800" height="auto">
+    </div>
+
+    <div class="container">
+      <div class="row bottom-text">
+        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
+          <h2>Le but de notre site</h2>
+          <p>WHAT-TO-DO est un réseau social pour partager l'amour et l'unité de notre terre. Le but est de partager nos connaissances sur toutes les domaines, surtout sur la nature. Sur ce site, vous pouvez rester en contact avec votre entourage par de nombreuses manières.</p>
+        </div>
+        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
+          <h2>Utilisation gratuite et facile</h2>
+          <p>Notre site est crée pour les débutants des réseaux sociaux jusqu'aux professionels. La couleur représentative de notre site est le rose. L'utilisation est 100% gratuite.  Les 3 fondateurs - Gustavo, Daniel et Susie - sont là pour toutes vos questions et propositions.</p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="sync-wrapper"></div>
 
+  <div id="sync-wrapper"></div>
   <script src="/dist/connection-window.js"></script>
   </script>
 </body>

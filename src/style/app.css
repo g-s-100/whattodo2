@@ -1,40 +1,122 @@
+/* body and textarea set up. (START)*/
 body{
-  background-color: #333;
-  color: #8888FF;
-  font-size: 20px;
+  background-color: #F5B7B1;
+  color: black;
+  font-size: 15px;
 
 }
-.moto{
-  border: 2px solid white;
-  margin-bottom: 50px;
 
-}
-.ME {
-  padding-left: 100px;
-  color: #06F;
-}
-.OTHER {
-  padding-left: 10px;
-  color: #F60;
-}
-.form-button{
-  /*border: 2px solid white;*/
-  margin-bottom: 50px;
-  padding-left: 40%;
-  padding-top: 50px;
-}
-.form{
-  border: 2px solid white;
-  margin-bottom: 50px;
-  padding-left: 10px;
-  padding-top: 10px;
-}
 textarea{
   font-size: 20px
 }
+/*(END)*/
+
+/* Controll all the scrollable content. (START)*/
+.scroll-posts{
+  height: 480px;
+  overflow-y: scroll;
+}
+
+.scroll-dialog{
+  height: 200px;
+  width: 380px;
+  overflow-y: scroll;
+}
+/*(END)*/
+
+/*Setup all post's features. (START)*/
+/*Post border and margin*/
+.post-div{
+  border: 3px solid #F1948A;
+  padding: 10px;
+  padding-left: 50px;
+  margin-bottom: 10px;
+}
+
+/*Post's text*/
+.post-text{
+  font-size: 25px;
+  color: red;
+}
+
+/*Post's info line*/
+.post-info{
+  font-size: 15px;
+  color: blue;
+}
+
+.posts-to-side{
+  padding-left: 10%;
+}
+/*(END)*/
+
+/*Page's display. (START)*/
+.wrapper{
+  overflow: hidden;
+}
+
+.to-the-left{
+  width: 600px;
+  float:left;
+}
+
+.to-the-right{
+  overflow: hidden;
+  margin-left: 200px;
+  margin-right: 20px;
+  float: right;
+}
+
+.jumbotron{
+  margin-top: 20px;
+  margin-bottom: 60px;
+  background-color: #F1948A;
+}
+/*(END)*/
+
+/*Dialog div. (START)*/
+.moto{
+  border: 2px solid #82BC5B;
+  width: 400px;
+  height: 270px;
+  float: right;
+}
+
+.ME {
+  padding-left: 150px;
+  max-width: 400px;
+  color: #06F;
+}
+
+.OTHER {
+  padding-left: 10px;
+  max-width: 200px;
+  color: #F60;
+}
+/*(END)*/
+
+/*Control when the HTML will be displayed. (START)*/
 .to-hide{
   display: none;
 }
+
 .to-show{
-  border: 1px solid gray;
+  font-size: 15px;
+}
+/*(END)*/
+
+.btn-outline-primary{
+  background-color: white;
+  color : #F1948A;
+  border-color: #F1948A;
+  border-width: 2px;
+}
+
+.form-button{
+  margin-bottom: 50px;
+  padding-top: 50px;
+}
+
+.bottom-text{
+  margin-bottom: 120px;
 }
