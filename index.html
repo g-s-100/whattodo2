@@ -1,106 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link type="text/css" href="src/style/app.css" rel="stylesheet"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <link type='text/css' href='src/style/app.css' rel='stylesheet'/>
 </head>
+<!-- -->
 <body>
-  <div id='new' class='to-hide'>
-    <div class="container" v-if='conecting'>
-      <div class="row pull-right">
-        <form>
-          <div class="col-sm-4">
-            <div class='input-group'>
-              <span class="input-group-addon">Identifiant:</span>
-              <input v-model="userID" class="form-control" type="text">
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="input-group">
-              <span class="input-group-addon">Mot de Passe:</span>
-              <input v-model="password" class='form-control' type="password" @keyup.enter='logIn'>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <button @click="logIn" class="btn btn-default" type="button">Connection</button>
-            <button @click="changeConectionType" class="btn btn-default" type="button">Créer nouvel utilisateur</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="container" v-else>
-      <form>
-        <div class="col-sm-4">
-          <div class='input-group'>
-            <span class="input-group-addon">Prénom:</span>
-            <input v-model="firstName" class="form-control" type="text">
-          </div>
+  <!--The app starts here-->
+  <div id='app'>
+    <!--Creates the connection bar-->
+    <nav class='navbar navbar-inverse'>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <span class="navbar-brand">Share2Learn</span>
         </div>
-        <div class="col-sm-4">
-          <div class='input-group'>
-            <span class="input-group-addon">Nom de Famille:</span>
-            <input v-model="lastName" class="form-control" type="text">
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class='input-group'>
-            <span class="input-group-addon">Age:</span>
-            <input v-model="age" class="form-control" type="text">
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class='input-group'>
-            <span class="input-group-addon">Identifiant:</span>
-            <input v-model="userID" class="form-control" type="text">
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class='input-group'>
-            <span class="input-group-addon">Mot de Passe:</span>
-            <input v-model="password" class="form-control" type="password" @keyup.enter='addNewUser'>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <button v-on:click="addNewUser" class="btn btn-default" type="button">Créer nouvel utilisateur</button><br>
-          <button @click="changeConectionType" class="btn btn-default" type="button">Se connecter</button>
-        </div>
-      </form>
-    </div>
 
-
-    <div class="jumbotron">
-      <div class="media pull-left">
-        <img src="src/assets/logo.png" alt="logo" width='150' height="150">
-      </div>
-      <h1>What-to-do</h1>
-      <p>Bienvenue à WHAT-TO-DO. Connectez-vous pour partager l'amour et l'unité de notre terre.</p>
-    </div>
-
-    <div class="text-center">
-      <img src="src/assets/whattodo.png" alt="indexphoto" width="800" height="auto">
-    </div>
-
-    <div class="container">
-      <div class="row bottom-text">
-        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
-          <h2>Le but de notre site</h2>
-          <p>WHAT-TO-DO est un réseau social pour partager l'amour et l'unité de notre terre. Le but est de partager nos connaissances sur toutes les domaines, surtout sur la nature. Sur ce site, vous pouvez rester en contact avec votre entourage par de nombreuses manières.</p>
+        <!--Not an important div-->
+        <div  v-if='isLogged' class='navbar-nav navbar-right'>
+          <span class='navbar-brand'>{{user}}</span>
+          <button @click='disconnect' class='btn btn-default'>Se déconnecter</button>
         </div>
-        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
-          <h2>Utilisation gratuite et facile</h2>
-          <p>Notre site est crée pour les débutants des réseaux sociaux jusqu'aux professionels. La couleur représentative de notre site est le rose. L'utilisation est 100% gratuite.  Les 3 fondateurs - Gustavo, Daniel et Susie - sont là pour toutes vos questions et propositions.</p>
+
+        <div v-else>
+          <!--Sign in form-->
+          <ul v-if='isConnecting' class='nav navbar-nav navbar-right'>
+            <li class='space'><input v-model='userInput' class="form-control" placeholder="Identifiant" type='text'></li>
+            <li class="space"><input type='password' class="form-control" placeholder="Mot de Passe" v-model='passwordInput' @keyup.enter='logIn'></li>
+            <button type='button' class="btn btn-default" @click='logIn'>Connecter</button>
+            <button type="button" class="btn btn-default" @click='createNew'>Créer un compte</button>
+          </ul>
+
+          <!--Create an user form-->
+          <ul v-else class="nav navbar-nav navbar-right">
+            <li class="space"><input type="text" v-model='newUserName' class='form-control' placeholder="Nom" required></li>
+            <li class="space"><input type="text" v-model='newUserID' class='form-control' placeholder="Identifiant" required></li>
+            <li class="space"><input type="password" v-model='newUserPassword' class='form-control' placeholder="Mot de Passe" @keyup.enter='createUser' required></li>
+            <button type="button" @click='createUser' class='btn btn-default'>Créer nouvel utilisateur</button>
+            <button type="button" @click='createNew'  class='btn btn-default'>Utiliser un compte existant</button>
+          </ul>
         </div>
       </div>
+    </nav>
+
+
+
+    <!--Main selectors-->
+    <nav class='navbar navbar-custom'>
+      <div class="container">
+        <ul class="nav navbar-nav">
+
+          <!--Exercice div selector-->
+          <li><span class="navbar-brand">Exercices:</span></li>
+          <li class="space-medium">
+            <select class="form-control" v-model='selectedCategory' @change='getExercices'>
+              <option disabled value="">Catégorie</option>
+              <option>Tout</option>
+              <option v-for='option in allExCategories'>{{option}}</option>
+            </select>
+          </li>
+
+          <!--Theory selector-->
+          <li><span class="navbar-brand">Théorie:</span></li>
+          <li class="space-medium">
+            <select class="form-control" v-model='selectedTheoryCategory' @change='getTheory'>
+              <option disabled value="">Catégorie</option>
+              <option>Tout</option>
+              <option v-for='option in allThCategories'>{{option}}</option>
+            </select>
+          </li>
+
+          <li class="space-medium">
+            <!--Display the user's profile-->
+            <button class="btn btn-default btn-gray" @click='showProfile' >Afficher mon profil</button>
+          </li>
+
+          <li class="space">
+            <!--Display the forms to add new content-->
+            <button type="button" class="btn btn-default btn-gray" @click='addStuff'>Ajouter</button>
+          </li>
+        </ul>
+      </div>
+    <!--End of Main selectors-->
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron" v-if="home">
+      <h1>Share2Learn</h1>
+      <p>Partagez vos connaissances: Ajoutez du nouveau contenu dans notre site.</p>
+      <p>Apprenez: choisissez une catégorie de théorie.</p>
+      <p>Exercez vous à l'aide des exercices proposés par nos utilisateurs.</p>
     </div>
   </div>
 
+    <!--User Profile-->
+    <div  class='container'>
+      <profil
+        v-if='displayProfile'
+        :user='user'
+        :myexercices='getMyExercices'
+        :mytheory='getMyTheory'
+        :mylikedex='getMyLikedEx'
+        :mylikedth='getMyLikedTh'
+      ></profil>
+    </div>
 
-  <div id="sync-wrapper"></div>
-  <script src="/dist/connection-window.js"></script>
-  </script>
+    <!--Forms to add-->
+    <div class='container' v-if='isAdding'>
+      <div class="jumbotron">
+        <div class="row">
+
+          <div class="col-sm-6">
+            <!--Form to add an new exercice-->
+            <div class='panel panel-default'>
+              <div class="panel-heading heading-font">Ajouter un Exercice</div>
+              <div class="form-group">
+                <label for="ex1" class='margin2'>Titre: </label>
+                <input id='ex1' type="text" v-model='newExerciceTitle' class="form-control margin1 max" placeholder="Titre">
+                <label for="image-exercice" class='margin2'>Ajouter un fichier: </label>
+                <input type="file" id='image-exercice'>
+                <label for="ex3" class='margin2'>Ajouter un commentaire: </label>
+                <textarea class='form-control margin1 max2' id='ex3' type="text" rows="4" cols="50" v-model='newExerciceComment'></textarea>
+                <label for='ex4' class='margin2'>Catégorie: </label>
+                <select id='ex4' class='form-control margin1 max2' v-model="newExerciceCategory">
+                  <option disabled value="">Choisir une catègorie</option>
+                  <option v-for='option in allExCategories'>{{option}}</option>
+                </select>
+                <label for="ex5" class='margin2'>Créer une nouvelle catégorie:</label>
+                <input type="text" class="form-control margin1 max" id="ex5" placeholder="Nom de la nouvelle catégorie">
+                <span class="help-block margin1">optionnel</span>
+                <button type="button" class="btn btn-default btn-lg margin2" @click='postExercice'>Ajouter</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <!--Form to add an new theory-->
+            <div class="panel panel-default">
+              <div class="panel-heading heading-font">Ajouter de la Théorie</div>
+              <div class="form-group">
+                <label for="th1" class='margin2'>Titre:</label>
+                <input class="form-control margin1 max" type="text" id="th1" placeholder="Titre" v-model='newTheoryTitle'>
+                <label for="image-theory" class='margin2'>Ajouter un fichier: </span>
+                <input type="file" id='image-theory'>
+                <label for="th3" class='margin2'>Ajouter un commentaire: </label>
+                <textarea class='form-control margin1' rows="4" cols="50" type="text" id='th3' v-model='newTheoryComment'></textarea>
+                <label for='th4' class='margin2'>Catégorie: </label>
+                <select id='th4' class='form-control margin1' v-model="newTheoryCategory">
+                  <option disabled value="">Choisir une catégorie</option>
+                  <option v-for='option in allThCategories'>{{option}}</option>
+                </select>
+                <label for="th5" class='margin2'>Créer une nouvelle catégorie:</label>
+                <input type="text" class="form-control margin1 max" id="th5" placeholder="Nom de la nouvelle catégorie">
+                <span class="help-block margin1">optionnel</span>
+                <button type="button" class="btn btn-default btn-lg margin2" @click='postTheory'>Ajouter</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!--Div to show exercices and theories-->
+    <div class='container'>
+      <exercice-list
+        v-if='showExercice'
+        v-for='(item, index) in contentToShow'
+        :exercice='item'
+        :number='index'
+        :key='index'
+        :addcomment='addComment'
+        :like='like'
+      >
+      </exercice-list>
+      <theory-list
+        v-if='showTheory'
+        v-for='(item, index) in contentToShow'
+        class='jumbotron'
+        :theory='item'
+        :number='index'
+        :key='index'
+        :like='likeTh'
+        :addcomment='addComment'
+      >
+      </theory-list>
+    </div>
+
+  <!--The App ends here-->
+  </div>
+  <!--Important do not touch-->
+  <div id='sync-wrapper'></div>
+  <script type='text/javascript' src='bundle.js'></script>
+<!-- -->
 </body>
 </html>

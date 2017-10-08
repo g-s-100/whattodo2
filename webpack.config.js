@@ -2,14 +2,10 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: {
-    connection: './src/scripts/connection.js',
-    home: './src/scripts/home.js'
-  },
+  entry: './src/scripts/home.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: '[name]-window.js'
+    path: __dirname,
+    filename: "bundle.js"
   },
   module: {
     rules: [

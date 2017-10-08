@@ -1,123 +1,136 @@
-/* body and textarea set up. (START)*/
 body{
-  background-color: #F5B7B1;
-  color: black;
-  font-size: 15px;
-
+  background-color: #cccbc9;
 }
 
 textarea{
-  font-size: 20px;
   resize: none;
 }
-/*(END)*/
 
-/* Controll all the scrollable content. (START)*/
-.scroll-posts{
-  height: 480px;
+.btn-default{
+  margin-top: 8px;
+  margin-right: 5px;
+}
+
+.btn-gray{
+  margin-top: 8px;
+  margin-right: 5px;
+  color: #fff;
+  background-color: #424242;
+  border-color: #000;
+}
+
+.form-control{
+  margin-top: 8px;
+}
+.space{
+  margin-right: 5px;
+}
+
+.space-medium{
+  margin-right: 80px
+}
+
+.btn-group-vertical{
+  height: 150px;
+  width: 350px;
   overflow-y: scroll;
 }
 
-.scroll-dialog{
-  height: 200px;
-  width: 380px;
-  overflow-y: scroll;
+.navbar-default{
+  background-color: #04c70e;
+  border-color: #a4a8ad;
 }
-/*(END)*/
 
-/*Setup all post's features. (START)*/
-/*Post border and margin*/
-.post-div{
-  border: 3px solid #F1948A;
-  padding: 10px;
-  padding-left: 50px;
+.navbar-custom{
+  background-color: #ebebeb;
+  border-color: #cccbc9;
+  color: #000;
+}
+
+.btn-blue{
+  background-color: #424242;
+  border-color: #000;
+  color: #fff;
+  margin-top: 0px;
+  margin-right: 0px;
+}
+
+.framed{
+  border: solid #000 2px;
+  background-color: #ebebeb;
+  color: #000;
+}
+
+.btn-like{
+  margin-right: 0px;
+  margin-left: 0px;
   margin-bottom: 10px;
 }
 
-/*Post's text*/
-.post-text{
-  font-size: 25px;
-  color: red;
+.margin1{
+  margin-top: -5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
-/*Post's info line*/
-.post-info{
-  font-size: 15px;
-  color: blue;
+.margin2{
+  margin-top: 10px;
+  margin-left: 8px;
 }
 
-.posts-to-side{
-  padding-left: 10%;
-}
-/*(END)*/
-
-/*Page's display. (START)*/
-.wrapper{
-  overflow: hidden;
-}
-
-.to-the-left{
-  width: 600px;
-  float:left;
-}
-
-.to-the-right{
-  overflow: hidden;
-  margin-left: 200px;
+.margin3{
+  margin-top: 50px;
+  margin-left: 10px;
   margin-right: 20px;
-  float: right;
 }
 
-.jumbotron{
-  margin-top: 20px;
-  margin-bottom: 60px;
-  background-color: #F1948A;
-}
-/*(END)*/
-
-/*Dialog div. (START)*/
-.moto{
-  border: 2px solid #82BC5B;
-  width: 400px;
-  height: 270px;
-  float: right;
+.no-margin{
+  margin: 0px;
 }
 
-.ME {
-  padding-left: 150px;
+.max{
+  max-width: 300px;
+}
+
+.max2{
   max-width: 400px;
-  color: #06F;
 }
 
-.OTHER {
-  padding-left: 10px;
-  max-width: 200px;
-  color: #F60;
-}
-/*(END)*/
-
-/*Control when the HTML will be displayed. (START)*/
-.to-hide{
-  display: none;
+.max3{
+  max-width: 500px;
 }
 
-.to-show{
-  font-size: 15px;
-}
-/*(END)*/
-
-.btn-outline-primary{
-  background-color: white;
-  color : #F1948A;
-  border-color: #F1948A;
-  border-width: 2px;
+.heading-font{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
 }
 
-.form-button{
-  margin-bottom: 50px;
-  padding-top: 50px;
+.profil-panel{
+  border-color: black;
 }
 
-.bottom-text{
-  margin-bottom: 120px;
+.panel-display{
+  background-color: #F2F2F2;
+  border-color: #cccbc9;
+  border-width: medium;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  color: #000;
+}
+
+.heading-display{
+  font-family: "Arial", Times, serif;
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.footer-font{
+  font-family: "Arial", Times, serif;
+  font-size: 20px;
+}
+
+.panel-list{
+  height: 620px;
+  width: 230px;
+  overflow-y: scroll;
 }
