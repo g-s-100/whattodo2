@@ -1,0 +1,147 @@
+body{
+  background-color: #cccbc9;
+}
+
+textarea{
+  resize: none;
+}
+
+.btn-default{
+  margin-top: 8px;
+  margin-right: 5px;
+}
+
+.btn-gray{
+  margin-top: 8px;
+  margin-right: 5px;
+  color: #fff;
+  background-color: #424242;
+  border-color: #000;
+}
+
+.form-control{
+  margin-top: 8px;
+}
+
+.space{
+  margin-right: 5px;
+}
+
+.space-medium{
+  margin-right: 80px
+}
+
+.btn-group-vertical{
+  height: 150px;
+  width: 350px;
+  overflow-y: scroll;
+}
+
+.navbar-default{
+  background-color: #04c70e;
+  border-color: #a4a8ad;
+}
+
+.navbar-custom{
+  background-color: #ebebeb;
+  border-color: #cccbc9;
+  color: #000;
+}
+
+.btn-blue{
+  background-color: #424242;
+  border-color: #000;
+  color: #fff;
+  margin-top: 0px;
+  margin-right: 0px;
+}
+
+.framed{
+  border: solid #000 2px;
+  background-color: #ebebeb;
+  color: #000;
+}
+
+.btn-like{
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-bottom: 10px;
+}
+
+.margin1{
+  margin-top: -5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.margin2{
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.margin3{
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.no-margin{
+  margin: 0px;
+}
+
+.max{
+  max-width: 300px;
+}
+
+.max2{
+  max-width: 400px;
+}
+
+.max3{
+  max-width: 500px;
+}
+
+.heading-font{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+}
+
+.profil-panel{
+  border-color: black;
+}
+
+.panel-display{
+  background-color: #F2F2F2;
+  border-color: #cccbc9;
+  border-width: medium;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  color: #000;
+}
+
+.heading-display{
+  font-family: "Arial", Times, serif;
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.footer-font{
+  font-family: "Arial", Times, serif;
+  font-size: 20px;
+}
+
+.panel-list{
+  height: 620px;
+  width: 230px;
+  border-color: black;
+  overflow-y: scroll;
+}
+
+.small-font {
+  font-family: "Arial", Times, serif;
+  font-size: 1px;
+}
+
+.boxed{
+  border-color: black;
+}
